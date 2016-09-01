@@ -9,6 +9,9 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+@property (strong, nonatomic) IBOutlet UITextView *mainTextView;
+@property (strong, nonatomic) IBOutlet UIButton *goButton;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *goButtonHeightFromBottomConstraint;
 
 @end
 

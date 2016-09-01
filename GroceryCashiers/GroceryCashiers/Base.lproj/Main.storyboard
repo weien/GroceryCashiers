@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,8 +16,44 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Test" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="64D-jg-9bu">
+                                <rect key="frame" x="8" y="28" width="584" height="504"/>
+                                <color key="backgroundColor" red="0.21043021980000001" green="0.33100444080000002" blue="0.48639506100000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bah-zc-PJi">
+                                <rect key="frame" x="270" y="540" width="60" height="40"/>
+                                <color key="backgroundColor" red="0.84313726430000002" green="0.32156863810000003" blue="0.2039215714" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="9TP-XJ-IaZ"/>
+                                    <constraint firstAttribute="height" constant="40" id="Vom-1Q-11z"/>
+                                </constraints>
+                                <state key="normal" title="Go">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WN3-Rl-GRm"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="64D-jg-9bu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="BL6-Nu-TCS"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Bah-zc-PJi" secondAttribute="bottom" constant="20" id="Hln-jM-3bg"/>
+                            <constraint firstAttribute="trailing" secondItem="64D-jg-9bu" secondAttribute="trailing" constant="8" id="Yuh-pi-btk"/>
+                            <constraint firstItem="Bah-zc-PJi" firstAttribute="top" secondItem="64D-jg-9bu" secondAttribute="bottom" constant="8" id="aGi-pU-m67"/>
+                            <constraint firstItem="64D-jg-9bu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="shI-UW-cVF"/>
+                            <constraint firstItem="Bah-zc-PJi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yyU-NC-VmK"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="goButton" destination="Bah-zc-PJi" id="2be-Df-Zyn"/>
+                        <outlet property="goButtonHeightFromBottomConstraint" destination="Hln-jM-3bg" id="kyf-p7-rc0"/>
+                        <outlet property="mainTextView" destination="64D-jg-9bu" id="VD6-Su-leI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
