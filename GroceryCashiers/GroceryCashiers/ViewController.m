@@ -33,7 +33,7 @@
     //self.mainTextView.text = @"2\nA 1 2\nA 1 2\nA 2 1\nA 3 2";
 }
 
-- (void) keyboardWillShow:(NSNotification*)sender {
+- (void) keyboardWillShow:(NSNotification*)sender { //thanks http://swiftandpainless.com/adjust-for-the-keyboard-in-ios-using-swift/
     NSDictionary* userInfo = sender.userInfo;
     CGRect keyboardRect = [userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
     self.goButtonHeightFromBottomConstraint.constant = CGRectGetHeight(keyboardRect) + 10;
@@ -161,7 +161,7 @@
 }
 
 - (void) showErrorMessage:(NSString*)message {
-    NSLog(@"error is %@", message);
+    NSLog(@"Error: %@", message);
 }
 
 - (void) showOutputMessage:(NSInteger)minutes {
