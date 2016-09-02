@@ -52,12 +52,14 @@
 - (NSDictionary*) runSimulationWithEntry:(NSString*)entry {
     NSInteger latestArrivalTime = 0;
     BOOL traineeIsStartingNewItem = NO;
+    NSInteger currentTime = 0;
     
     NSMutableArray* rows = [[entry componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] mutableCopy];
     if (rows.count < 2) {
         return @{@"success":@NO,@"error":NSLocalizedString(@"Please enter at least 2 rows.", nil)};
     }
     else {
+        //set up an array of cashiers
         NSInteger numberOfCashiers = [rows.firstObject integerValue];
         NSMutableArray* cashiers = [NSMutableArray array];
         for (NSInteger n = 1; n <= numberOfCashiers; n++) {
@@ -65,7 +67,6 @@
             [cashiers addObject:cashier];
         }
         [rows removeObjectAtIndex:0];
-        NSInteger currentTime = 0;
         
         for (NSString* customerRow in rows) { //do a couple things in advance of looping through time
             //check row fidelity
@@ -114,7 +115,6 @@
                 NSArray* customerData = [customerRow componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                 NSInteger arrivalTime = [[customerData objectAtIndex:1] integerValue];
                 
-                //check if customer
                 if (arrivalTime == currentTime) {
                     NSString* type = customerData.firstObject;
                     NSInteger numberOfItems = [customerData.lastObject integerValue];
