@@ -30,7 +30,8 @@
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     
-    self.mainTextView.text = @"2\nA 1 5\nB 2 1\nA 3 5\nB 5 3\nA 8 2";
+    //self.mainTextView.text = @"2\nA 1 5\nB 2 1\nA 3 5\nB 5 3\nA 8 2";
+    //self.mainTextView.text = @"2\nA 1 2\nA 1 2\nA 2 1\nA 3 2";
 }
 
 - (void) keyboardWillShow:(NSNotification*)sender {
@@ -105,11 +106,14 @@
                     NSInteger numberOfItems = [customerData.lastObject integerValue];
                     if ([type isEqualToString:kTypeA]) {
                         NSArray* sortedCashiers = [cashiers sortedArrayUsingComparator:^NSComparisonResult(Cashier* obj1, Cashier* obj2) {
-                            if (obj1.customers.count > obj2.customers.count) { //thanks http://stackoverflow.com/a/17498269/2284713
+                            if (obj1.customers.count < obj2.customers.count) { //thanks http://stackoverflow.com/a/17498269/2284713
                                 return NSOrderedAscending;
                             }
-                            else {
+                            else if (obj1.customers.count > obj2.customers.count) {
                                 return NSOrderedDescending;
+                            }
+                            else {
+                                return NSOrderedSame;
                             }
                         }];
                         Cashier* cashierWithLeastCustomers = sortedCashiers.firstObject;
