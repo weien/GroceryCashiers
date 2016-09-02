@@ -14,6 +14,7 @@
 		64BA551A1D78CDD90018FE57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64BA55191D78CDD90018FE57 /* Assets.xcassets */; };
 		64BA551D1D78CDD90018FE57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64BA551B1D78CDD90018FE57 /* LaunchScreen.storyboard */; };
 		64BA55281D78CDD90018FE57 /* GroceryCashiersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 64BA55271D78CDD90018FE57 /* GroceryCashiersTests.m */; };
+		64BA553B1D78EB270018FE57 /* Cashier.m in Sources */ = {isa = PBXBuildFile; fileRef = 64BA553A1D78EB270018FE57 /* Cashier.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		64BA55231D78CDD90018FE57 /* GroceryCashiersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceryCashiersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		64BA55271D78CDD90018FE57 /* GroceryCashiersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroceryCashiersTests.m; sourceTree = "<group>"; };
 		64BA55291D78CDD90018FE57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64BA55391D78EB270018FE57 /* Cashier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cashier.h; sourceTree = "<group>"; };
+		64BA553A1D78EB270018FE57 /* Cashier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cashier.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				64BA55111D78CDD90018FE57 /* AppDelegate.m */,
 				64BA55131D78CDD90018FE57 /* ViewController.h */,
 				64BA55141D78CDD90018FE57 /* ViewController.m */,
+				64BA55391D78EB270018FE57 /* Cashier.h */,
+				64BA553A1D78EB270018FE57 /* Cashier.m */,
 				64BA55161D78CDD90018FE57 /* Main.storyboard */,
 				64BA55191D78CDD90018FE57 /* Assets.xcassets */,
 				64BA551B1D78CDD90018FE57 /* LaunchScreen.storyboard */,
@@ -214,6 +219,7 @@
 				64BA55151D78CDD90018FE57 /* ViewController.m in Sources */,
 				64BA55121D78CDD90018FE57 /* AppDelegate.m in Sources */,
 				64BA550F1D78CDD90018FE57 /* main.m in Sources */,
+				64BA553B1D78EB270018FE57 /* Cashier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
