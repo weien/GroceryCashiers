@@ -70,6 +70,20 @@
         [rows removeObjectAtIndex:0];
         NSInteger currentTime = 0;
         
+        for (NSString* customerRow in rows) { //do a couple things in advance of looping through time
+            //check row fidelity
+            NSArray* customerData = [customerRow componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if (customerData.count != 3) {
+                return @{@"success":@NO,@"error":NSLocalizedString(@"Each row should have exactly 3 items.", nil)};
+            }
+            
+            //determine latestArrivalTime
+            NSInteger arrivalTime = [[customerData objectAtIndex:1] integerValue];
+            if (arrivalTime > latestArrivalTime) {
+                latestArrivalTime = arrivalTime;
+            }
+        }
+        
         while (YES) {
             //PROCESSING EXISTING CUSTOMERS
             for (Cashier* cashier in cashiers) {
@@ -100,14 +114,9 @@
             //ADDING CUSTOMERS
             for (NSString* customerRow in rows) {
                 NSArray* customerData = [customerRow componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                if (customerData.count != 3) {
-                    return @{@"success":@NO,@"error":NSLocalizedString(@"Each row should have exactly 3 items.", nil)};
-                }
                 NSInteger arrivalTime = [[customerData objectAtIndex:1] integerValue];
-                if (arrivalTime > latestArrivalTime) {
-                    latestArrivalTime = arrivalTime;
-                }
                 
+                //check if customer
                 if (arrivalTime == currentTime) {
                     NSString* type = customerData.firstObject;
                     NSInteger numberOfItems = [customerData.lastObject integerValue];
