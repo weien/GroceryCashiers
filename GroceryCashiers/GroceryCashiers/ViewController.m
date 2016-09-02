@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *mainTextView;
 @property (strong, nonatomic) IBOutlet UIButton *goButton;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *goButtonHeightFromBottomConstraint;
+@property (strong, nonatomic) UIAlertController *alertController;
 
 @end
 
@@ -28,6 +29,9 @@
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
+    
+    self.alertController = [UIAlertController alertControllerWithTitle:@"TestTitle" message:@"TestMessage" preferredStyle:UIAlertControllerStyleAlert];
+    [self.alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:NULL]];
 }
 
 - (void) keyboardWillShow:(NSNotification*)sender { //thanks http://swiftandpainless.com/adjust-for-the-keyboard-in-ios-using-swift/
@@ -173,11 +177,15 @@
 }
 
 - (void) showErrorMessage:(NSString*)message {
-    NSLog(@"Error: %@", message);
+    self.alertController.title = NSLocalizedString(@"Error", nil);
+    self.alertController.message = message;
+    [self showViewController:self.alertController sender:self];
 }
 
 - (void) showOutputMessage:(NSInteger)minutes {
-    NSLog(@"Finished at: t=%d minutes", minutes);
+    self.alertController.title = NSLocalizedString(@"Success", nil);
+    self.alertController.message = [NSString stringWithFormat:@"%@%d %@", NSLocalizedString(@"Finished at: t=", nil), minutes, NSLocalizedString(@"minutes", nil)];
+    [self showViewController:self.alertController sender:self];
 }
 
 @end
