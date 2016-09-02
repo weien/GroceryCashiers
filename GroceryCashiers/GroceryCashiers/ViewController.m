@@ -28,9 +28,6 @@
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
-    
-    //self.mainTextView.text = @"2\nA 1 5\nB 2 1\nA 3 5\nB 5 3\nA 8 2";
-    //self.mainTextView.text = @"2\nA 1 2\nA 1 2\nA 2 1\nA 3 2";
 }
 
 - (void) keyboardWillShow:(NSNotification*)sender { //thanks http://swiftandpainless.com/adjust-for-the-keyboard-in-ios-using-swift/
@@ -85,10 +82,10 @@
         }
         
         while (YES) {
-            //PROCESSING EXISTING CUSTOMERS
+            //***PROCESSING EXISTING CUSTOMERS***
             for (Cashier* cashier in cashiers) {
                 if (cashier.customers.count > 0) {
-                    //DEAL WITH TRAINING CASHIER
+                    //Take training cashier into consideration
                     if ([cashier isEqual:cashiers.lastObject]) {
                         if (traineeIsStartingNewItem) {
                             traineeIsStartingNewItem = NO;
@@ -100,6 +97,7 @@
                         }
                     }
                     
+                    //Finish items and/or customers
                     NSInteger firstCustomerItemsRemaining = [cashier.customers.firstObject integerValue];
                     if (firstCustomerItemsRemaining == 1) {
                         [cashier.customers removeObjectAtIndex:0];
@@ -111,7 +109,7 @@
                 }
             }
             
-            //ADDING CUSTOMERS
+            //**ADDING CUSTOMERS***
             for (NSString* customerRow in rows) {
                 NSArray* customerData = [customerRow componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                 NSInteger arrivalTime = [[customerData objectAtIndex:1] integerValue];
