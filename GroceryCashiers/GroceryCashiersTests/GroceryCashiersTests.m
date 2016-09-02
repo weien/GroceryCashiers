@@ -43,6 +43,12 @@
     XCTAssertEqual(6,[output[@"minutes"] integerValue]);
 }
 
+- (void)testExample4 {
+    NSString* example = @"2\nA 1 5\nB 2 3\nA 3 5\nB 5 3\nA 8 2";
+    NSDictionary* output = [self.vc runSimulationWithEntry:example];
+    XCTAssertEqual(14,[output[@"minutes"] integerValue]);
+}
+
 - (void)testError {
     NSString* example = @"2\nC 1 2";
     NSDictionary* output = [self.vc runSimulationWithEntry:example];
