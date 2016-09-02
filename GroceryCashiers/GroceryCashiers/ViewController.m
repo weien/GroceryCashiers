@@ -43,17 +43,22 @@
     
 }
 - (IBAction)goButtonTapped:(id)sender {
-    [self runSimulationWithEntry:self.mainTextView.text];
+    NSDictionary* output = [self runSimulationWithEntry:self.mainTextView.text];
+    if ([output[@"success"] boolValue]) {
+        [self showOutputMessage:[output[@"minutes"] integerValue]];
+    }
+    else {
+        [self showErrorMessage:output[@"error"]];
+    }
 }
 
-- (void) runSimulationWithEntry:(NSString*)entry {
+- (NSDictionary*) runSimulationWithEntry:(NSString*)entry {
     NSInteger latestArrivalTime = 0;
     BOOL traineeIsStartingNewItem = NO;
     
     NSMutableArray* rows = [[entry componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] mutableCopy];
     if (rows.count < 2) {
-        [self showErrorMessage:NSLocalizedString(@"Please enter at least 2 rows.", nil)];
-        return;
+        return @{@"success":@NO,@"error":NSLocalizedString(@"Please enter at least 2 rows.", nil)};
     }
     else {
         NSInteger numberOfCashiers = [rows.firstObject integerValue];
@@ -96,8 +101,7 @@
             for (NSString* customerRow in rows) {
                 NSArray* customerData = [customerRow componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                 if (customerData.count != 3) {
-                    [self showErrorMessage:NSLocalizedString(@"Each row should have exactly 3 items.", nil)];
-                    return;
+                    return @{@"success":@NO,@"error":NSLocalizedString(@"Each row should have exactly 3 items.", nil)};
                 }
                 NSInteger arrivalTime = [[customerData objectAtIndex:1] integerValue];
                 if (arrivalTime > latestArrivalTime) {
@@ -142,8 +146,7 @@
                         }
                     }
                     else {
-                        [self showErrorMessage:NSLocalizedString(@"Customers should either be type 'A' or 'B.'", nil)];
-                        return;
+                        return @{@"success":@NO,@"error":NSLocalizedString(@"Customers should either be type 'A' or 'B.'", nil)};
                     }
                 }
             }
@@ -151,8 +154,7 @@
             //are all cashiers free AND all customers processed?
             NSArray* busyCashiers = [cashiers filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"customers.@count > 0"]];
             if (busyCashiers.count == 0 && currentTime >= latestArrivalTime) {
-                [self showOutputMessage:currentTime];
-                return;
+                return @{@"success":@YES,@"minutes":@(currentTime)};
             }
             
             currentTime++;
