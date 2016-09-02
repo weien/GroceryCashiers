@@ -13,8 +13,6 @@
 @property (strong, nonatomic) IBOutlet UITextView *mainTextView;
 @property (strong, nonatomic) IBOutlet UIButton *goButton;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *goButtonHeightFromBottomConstraint;
-@property (assign, nonatomic) NSInteger latestArrivalTime;
-@property (assign, nonatomic) BOOL traineeIsStartingNewItem;
 
 @end
 
@@ -44,10 +42,14 @@
     
 }
 - (IBAction)goButtonTapped:(id)sender {
-    self.latestArrivalTime = 0;
-    self.traineeIsStartingNewItem = NO;
+    [self runSimulationWithEntry:self.mainTextView.text];
+}
+
+- (void) runSimulationWithEntry:(NSString*)entry {
+    NSInteger latestArrivalTime = 0;
+    BOOL traineeIsStartingNewItem = NO;
     
-    NSMutableArray* rows = [[self.mainTextView.text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] mutableCopy];
+    NSMutableArray* rows = [[entry componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] mutableCopy];
     if (rows.count < 2) {
         [self showErrorMessage:NSLocalizedString(@"Please enter at least 2 rows.", nil)];
         return;
@@ -68,12 +70,12 @@
                 if (cashier.customers.count > 0) {
                     //DEAL WITH TRAINING CASHIER
                     if ([cashier isEqual:cashiers.lastObject]) {
-                        if (self.traineeIsStartingNewItem) {
-                            self.traineeIsStartingNewItem = NO;
+                        if (traineeIsStartingNewItem) {
+                            traineeIsStartingNewItem = NO;
                             //trainee has finally finished the item! can do the below logic
                         }
                         else {
-                            self.traineeIsStartingNewItem = YES;
+                            traineeIsStartingNewItem = YES;
                             break; //starting a new item -- can't do the below
                         }
                     }
@@ -97,8 +99,8 @@
                     return;
                 }
                 NSInteger arrivalTime = [[customerData objectAtIndex:1] integerValue];
-                if (arrivalTime > self.latestArrivalTime) {
-                    self.latestArrivalTime = arrivalTime;
+                if (arrivalTime > latestArrivalTime) {
+                    latestArrivalTime = arrivalTime;
                 }
                 
                 if (arrivalTime == currentTime) {
@@ -143,7 +145,7 @@
             
             //are all cashiers free AND all customers processed?
             NSArray* busyCashiers = [cashiers filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"customers.@count > 0"]];
-            if (busyCashiers.count == 0 && currentTime >= self.latestArrivalTime) {
+            if (busyCashiers.count == 0 && currentTime >= latestArrivalTime) {
                 [self showOutputMessage:currentTime];
                 return;
             }
