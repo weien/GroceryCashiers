@@ -10,11 +10,10 @@
 
 @implementation Cashier
 
-- (instancetype)init {//WithRegisterNumber:(NSInteger)registerNumber {
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.customers = [NSMutableArray array];
-        //self.registerNumber = registerNumber;
     }
     return self;
 }

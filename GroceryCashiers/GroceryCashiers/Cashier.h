@@ -10,7 +10,4 @@
 
 @interface Cashier : NSObject
 @property (nonatomic, strong) NSMutableArray* customers;
-//@property (nonatomic, assign) NSInteger registerNumber;
-
-//- (instancetype)initWithRegisterNumber:(NSInteger)registerNumber;
 @end
