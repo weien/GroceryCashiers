@@ -141,11 +141,14 @@
                         }
                         else {
                             NSArray* sortedCashiers = [cashiers sortedArrayUsingComparator:^NSComparisonResult(Cashier* obj1, Cashier* obj2) {
-                                if ([obj1.customers.lastObject integerValue] > [obj2.customers.lastObject integerValue]) {
+                                if ([obj1.customers.lastObject integerValue] < [obj2.customers.lastObject integerValue]) {
                                     return NSOrderedAscending;
                                 }
-                                else {
+                                else if ([obj1.customers.lastObject integerValue] > [obj2.customers.lastObject integerValue]) {
                                     return NSOrderedDescending;
+                                }
+                                else {
+                                    return NSOrderedSame;
                                 }
                             }];
                             Cashier* cashierWithSmallestLastCustomer = sortedCashiers.firstObject;
