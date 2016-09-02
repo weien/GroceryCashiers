@@ -19,6 +19,7 @@
 @implementation ViewController
 
 #define kTypeA @"A"
+#define kTypeB @"B"
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -121,7 +122,7 @@
                         Cashier* cashierWithLeastCustomers = sortedCashiers.firstObject;
                         [cashierWithLeastCustomers.customers addObject:@(numberOfItems)];
                     }
-                    else { //typeB
+                    else if ([type isEqualToString:kTypeB]) {
                         NSArray* emptyCashiers = [cashiers filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"customers.@count == 0"]];
                         if (emptyCashiers.count > 0) {
                             Cashier* firstEmptyCashier = emptyCashiers.firstObject;
@@ -139,6 +140,10 @@
                             Cashier* cashierWithSmallestLastCustomer = sortedCashiers.firstObject;
                             [cashierWithSmallestLastCustomer.customers addObject:@(numberOfItems)];
                         }
+                    }
+                    else {
+                        [self showErrorMessage:NSLocalizedString(@"Customers should either be type 'A' or 'B.'", nil)];
+                        return;
                     }
                 }
             }
